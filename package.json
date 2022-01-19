@@ -1,0 +1,89 @@
+{
+  "name": "@ausweisapp2/identglue",
+  "version": "0.1.0",
+  "description": "This library allows webpages to integrate seamlessly with the German eID system. It provides client-side helpers to detect or open an eID client and start an identification process from the browser.",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "source": "src/index.js",
+  "exports": {
+    "require": "./dist/identglue.cjs",
+    "default": "./dist/identglue.modern.js"
+  },
+  "main": "./dist/identglue.cjs",
+  "umd:main": "./dist/identglue.umd.js",
+  "amdName": "AusweisApp2",
+  "module": "./dist/identglue.module.js",
+  "types": "./dist/index.d.ts",
+  "repository": "https://github.com/Governikus/identglue.git",
+  "keywords": [
+    "eID",
+    "AusweisApp2"
+  ],
+  "author": "Governikus GmbH & Co. KG",
+  "license": "EUPL-1.2",
+  "homepage": "https://github.com/Governikus/identglue",
+  "scripts": {
+    "dev": "microbundle watch & serve .",
+    "build": "microbundle && tsc",
+    "test": "npm run format:check && eslint src && npm run karma:start",
+    "release": "npm run build && npm t && git commit -am \"$npm_package_version\" && git tag $npm_package_version && git push && git push --tags && npm publish",
+    "format": "prettier --write './**/*.{ts,js,cjs,json,yml,md}'",
+    "format:check": "prettier --check './**/*.{ts,js,cjs,json,yml,md}'",
+    "karma:start": "karma start karma.conf.cjs"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "babel-plugin-istanbul": "^6.1.1",
+    "babel-plugin-transform-async-to-promises": "^0.8.15",
+    "dequal": "^2.0.2",
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "jasmine-ajax": "^4.0.0",
+    "jasmine-core": "^3.10.1",
+    "karma": "^6.3.6",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-coverage": "^2.0.3",
+    "karma-firefox-launcher": "^2.1.1",
+    "karma-jasmine": "^4.0.1",
+    "karma-jasmine-ajax": "^0.1.13",
+    "karma-rollup-preprocessor": "^7.0.7",
+    "microbundle": "^0.14.1",
+    "prettier": "^2.4.1",
+    "serve": "^12.0.1",
+    "typescript": "^4.4.4",
+    "whatwg-fetch": "^3.6.2"
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "prettier"
+    ],
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+      "ecmaVersion": 2021,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "modules": true,
+        "impliedStrict": true
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+/*
+ * Note: Styles are not relevant for the functionality.
+ */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: rgba(87,190,255,.05);
+}
+
+section {
+  margin-top: 3rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background: rgba(87,190,255,.48);
+  border-radius: 6px;
+  color: #000;
+  text-decoration: none;
+}
+
+#status {
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  padding: 0.5rem;
+}
+
+#eid-install-app-hint {
+  border-radius: 6px;
+  border: 1px solid coral;
+  padding: 0.5rem;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AA2.JS jQuery example</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <main>
+      <section>
+        <h1>Stationary</h1>
+
+        <pre id="status">Status: loading</pre>
+      </section>
+
+      <section>
+        <h1>Mobile</h1>
+
+        <strong>Mit der Online-Ausweisfunktion anmelden:</strong><br />
+        <a
+          id="mobile_a"
+          class="btn"
+          href="eid://127.0.0.1:24727/eID-Client?tcTokenURL=https%3A%2F%2Fexample.com%2Ftctoken"
+          >Ausweis-App starten</a
+        >
+        <p id="eid-install-app-hint" hidden>
+          Installieren Sie zuerst die AusweisApp2 auf Ihrem Gerät:<br />
+          <a
+            href="https://apps.apple.com/us/app/ausweisapp2/id948660805?l=de&ls=1"
+            >App Store</a
+          >
+          <a
+            href="https://play.google.com/store/apps/details?id=com.governikus.ausweisapp2"
+            >Google Play</a
+          >
+        </p>
+      </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="/dist/identglue.umd.js"></script>
+    <script>
+      $(function () {
+        // Stationary Status
+        const observer = new AusweisApp2.StationaryStatusObserver((status) => {
+          console.log("new status", status);
+          let s = "Status: " + status.status;
+          if (status.details) {
+            s += `\nfound ${status.details.name}, version ${status.details.implementationVersion} by ${status.details.implementationVendor}`;
+          }
+          $("#status").text(s);
+        });
+
+        observer.observe();
+
+        // Mobile
+        AusweisApp2.observeEIDLink($("#mobile_a")[0], () => {
+          console.log("App nicht installiert?");
+          $("#eid-install-app-hint").removeAttr("hidden");
+        });
+      });
+    </script>
+  </body>
+</html>
