@@ -1,4 +1,4 @@
-import { isMobile, isSafari } from "../src/platform.js";
+import { isChromeOS, isMobile, isSafari } from "../src/platform.js";
 
 describe("platform", function () {
   var originalUserAgentData = window.navigator.userAgentData;
@@ -82,6 +82,34 @@ describe("platform", function () {
       });
 
       expect(isSafari()).toBe(true);
+    });
+  });
+
+  describe("isChromeOS", function () {
+    it("should return false in safari, firefox, Chrome and desktop browsers", function () {
+      expect(isChromeOS()).toBe(false);
+    });
+
+    it("should return true on chromeOS Browser x86 CPU", function () {
+      navigator.__defineGetter__("userAgent", function () {
+        return "Mozilla/5.0 (X11; CrOS x86_64 15183.78.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36";
+      });
+      navigator.__defineGetter__("vendor", function () {
+        return "Google Inc.";
+      });
+
+      expect(isChromeOS()).toBe(true);
+    });
+
+    it("should return true on chromeOS Browser ARM CPU", function () {
+      navigator.__defineGetter__("userAgent", function () {
+        return "Mozilla/5.0 (X11; CrOS aarch64 15183.69.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36";
+      });
+      navigator.__defineGetter__("vendor", function () {
+        return "Google Inc.";
+      });
+
+      expect(isChromeOS()).toBe(true);
     });
   });
 });

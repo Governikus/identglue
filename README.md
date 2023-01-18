@@ -8,7 +8,7 @@ This library allows webpages to integrate seamlessly with the German eID system.
 - Helpers for creating spec-compliant eID client URLs
   - Use them with frameworks and libaries like React, Vue, Svelte, etc. or server side rendered pages.
 - Rules out cross platform differences
-- Experimental: Detection on mobile platforms
+- Experimental: Detection on mobile platforms and ChromeOS
 
 ## Installation
 

@@ -38,3 +38,16 @@ export function isSafari() {
   }
   return isSafari;
 }
+
+/**
+ * @returns {boolean}
+ */
+export function isChromeOS() {
+  const regex = /CrOS/;
+  let isChromeOS = false;
+  if (navigator.vendor != null) {
+    isChromeOS =
+      navigator.vendor === "Google Inc." && regex.test(navigator.userAgent);
+  }
+  return isChromeOS;
+}
