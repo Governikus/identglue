@@ -7,7 +7,7 @@ describe("getStationaryStatus", function () {
   var aa2StatusResponse = JSON.stringify({
     "Implementation-Title": "AusweisApp2",
     "Implementation-Vendor": "Governikus GmbH & Co. KG",
-    "Implementation-Version": "1.26.1",
+    "Implementation-Version": "1.26.3",
     Name: "AusweisApp2",
     "Specification-Title": "TR-03124",
     "Specification-Vendor": "Federal Office for Information Security",
@@ -34,7 +34,7 @@ describe("getStationaryStatus", function () {
       contentType: "application/json",
       responseHeaders: {
         "access-control-allow-origin": "*",
-        server: "AusweisApp2/1.26.1 (TR-03124-1/1.3)",
+        server: "AusweisApp2/1.26.3 (TR-03124-1/1.3)",
       },
       response: aa2StatusResponse,
     });
@@ -44,7 +44,7 @@ describe("getStationaryStatus", function () {
       expect(status.details).toEqual({
         implementationTitle: "AusweisApp2",
         implementationVendor: "Governikus GmbH & Co. KG",
-        implementationVersion: "1.26.1",
+        implementationVersion: "1.26.3",
         name: "AusweisApp2",
         specificationTitle: "TR-03124",
         specificationVendor: "Federal Office for Information Security",

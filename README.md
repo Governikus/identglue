@@ -24,7 +24,12 @@ npm install @ausweisapp2/identglue
 <script defer src="https://unpkg.com/@ausweisapp2/identglue"></script>
 ```
 
-The script exports all functions under the `AusweisApp2` namespace on the global object.
+The script exports all functions under the `AusweisApp2` namespace on the global object,
+or use the direct call to the script with a specific version.
+
+```html
+<script src="https://unpkg.com/@ausweisapp2/identglue@1.0.2/dist/identglue.umd.js"></script>
+```
 
 ## Usage
 
@@ -49,6 +54,8 @@ const observer = new StationaryStatusObserver((status) => {
     // TODO: enable the "Start Identification" button
   } else if (status.status === "unavailable") {
     // TODO: display a message to the users, asking to install and start the eID client.
+  } else if (status.status === "safari") {
+    // TODO: display a message to the users, asking to install and start the eID client for Safari Browser.
   } else {
     // TODO: display a generic warning message and enable the "Start Identification" button
   }
@@ -106,8 +113,9 @@ document.body.appendChild(img);
 
 If you want to learn more about integrating the eID functionality into your system, the following resources might be usefull:
 
-- [TR-03124-1 eID-Client – Part 1: Specifications](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03124/TR-03124-1.pdf?__blob=publicationFile&v=1)
+- [TR-03124-1 eID-Client - Part 1: Specifications](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03124/TR-03124-1.pdf?__blob=publicationFile&v=1)
 - [AusweisApp2 SDK Documentation](https://www.ausweisapp.bund.de/sdk/)
+- [AusweisApp2 GitHub repository](https://github.com/Governikus/AusweisApp2)
 
 **Usage with IE11:**
 

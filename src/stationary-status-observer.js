@@ -3,7 +3,7 @@
  */
 
 import { dequal } from "dequal/lite";
-import { isMobile } from "./platform.js";
+import { isMobile, isSafari } from "./platform.js";
 import { getStationaryStatus } from "./stationary.js";
 
 /**
@@ -72,6 +72,12 @@ export class StationaryStatusObserver {
     if (isMobile()) {
       // The local AA2 server is only available on stationary systems.
       this.#updateStatus({ status: "unknown", details: null });
+      return;
+    }
+
+    /** Safari Browser blocks localhost calls */
+    if (isSafari()) {
+      this.#updateStatus({ status: "safari", details: null });
       return;
     }
 

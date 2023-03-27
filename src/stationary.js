@@ -6,7 +6,7 @@ import { getClientURL } from "./common.js";
 
 /**
  * @typedef {Object} AusweisApp2Status
- * @prop {"available" | "unavailable" | "unknown"} status
+ * @prop {"available" | "unavailable" | "unknown" | "safari"} status
  * @prop {AusweisApp2StatusResponse | null} details
  */
 

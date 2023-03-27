@@ -1,6 +1,6 @@
 {
   "name": "@ausweisapp2/identglue",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This library allows webpages to integrate seamlessly with the German eID system. It provides client-side helpers to detect or open an eID client and start an identification process from the browser.",
   "files": [
     "dist"
@@ -55,7 +55,7 @@
     "karma-rollup-preprocessor": "^7.0.7",
     "microbundle": "^0.14.2",
     "prettier": "^2.8.3",
-    "serve": "^14.1.2",
+    "serve": "^14.2.0",
     "typescript": "^4.9.4",
     "whatwg-fetch": "^3.6.2"
   },

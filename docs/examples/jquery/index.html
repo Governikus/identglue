@@ -4,20 +4,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AA2.JS jQuery example</title>
+    <title>identglue jQuery example</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
 
   <body>
     <main>
+      <h1>Identglue jquery example</h1>
       <section>
-        <h1>Stationary</h1>
+        <h2>Stationary</h2>
 
         <pre id="status">Status: loading</pre>
+        <pre id="browser-info">Browser info: </pre>
       </section>
 
       <section>
-        <h1>Mobile</h1>
+        <h2>Mobile</h2>
 
         <strong>Mit der Online-Ausweisfunktion anmelden:</strong><br />
         <a
@@ -39,9 +41,14 @@
         </p>
       </section>
     </main>
+    <div class="footer">
+      <a target="_blank" class="url" href="https://github.com/Governikus/identglue">Github</a>
+      <a target="_blank" class="url" href="https://www.npmjs.com/package/@ausweisapp2/identglue">npm</a>
+    </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js" integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo="
-            crossorigin="anonymous"></script>
+     <script src="https://code.jquery.com/jquery-3.6.4.slim.js" 
+             integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4="
+             crossorigin="anonymous"></script>
     <script src="/dist/identglue.umd.js"></script>
     <script>
       $(function () {
@@ -51,6 +58,10 @@
           let s = "Status: " + status.status;
           if (status.details) {
             s += `\nfound ${status.details.name}, version ${status.details.implementationVersion} by ${status.details.implementationVendor}`;
+          }
+          if (s.includes("safari"))
+          {
+            s = "Status: Please start the AusweisApp2 first"
           }
           $("#status").text(s);
         });
@@ -62,6 +73,8 @@
           console.log("App nicht installiert?");
           $("#eid-install-app-hint").removeAttr("hidden");
         });
+        const browserInfo = window.navigator.userAgent;
+        $("#browser-info").text("Browser: " +  browserInfo.concat(" ", window.navigator.vendor));
       });
     </script>
   </body>

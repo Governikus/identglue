@@ -34,3 +34,38 @@ section {
   border: 1px solid coral;
   padding: 0.5rem;
 }
+
+h1 {
+  text-align: center;
+}
+
+.url {
+  margin-top: 3rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  color: lightgray;
+}
+
+.footer {
+  position: fixed;
+  background-color: rgb(20, 19, 19);
+  padding: 10px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  color: lightgray;
+  overflow: hidden;
+}
+
+#browser-info {
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  padding: 0.5rem;
+}
+
+pre {
+  white-space: pre-line;
+  word-wrap: break-word;
+  text-align: justify;
+  background-color: #eaeded;
+}
