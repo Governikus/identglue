@@ -12,13 +12,13 @@ This library allows webpages to integrate seamlessly with the German eID system.
 
 ## Installation
 
-### Option 1 – Install with npm/yarn/pnpm:
+### Option 1 - Install with npm/yarn/pnpm:
 
 ```bash
 npm install @ausweisapp2/identglue
 ```
 
-### Option 2 – Load the script via a CDN:
+### Option 2 - Load the script via a CDN:
 
 ```html
 <script defer src="https://unpkg.com/@ausweisapp2/identglue"></script>
@@ -28,7 +28,7 @@ The script exports all functions under the `AusweisApp2` namespace on the global
 or use the direct call to the script with a specific version.
 
 ```html
-<script src="https://unpkg.com/@ausweisapp2/identglue@1.0.3/dist/identglue.umd.js"></script>
+<script src="https://unpkg.com/@ausweisapp2/identglue@1.0.4/dist/identglue.umd.js"></script>
 ```
 
 ## Usage
@@ -142,11 +142,11 @@ const observer = new StationaryStatusObserver(callback[, options]);
 
 **Parameters:**
 
-- `callback` – A function which is called when the status changes. The callback is called with the observer instance as the `this` value and receives one input parameter:
+- `callback` - A function which is called when the status changes. The callback is called with the observer instance as the `this` value and receives one input parameter:
 
-  - `status` – The new status object. See the [AusweisApp2Status](#ausweisapp2status) type for available properties.
+  - `status` - The new status object. See the [AusweisApp2Status](#ausweisapp2status) type for available properties.
 
-- `options` (optional) – An object which customizes the behavior of the observer. You can provide any combination of the following options:
+- `options` (optional) - An object which customizes the behavior of the observer. You can provide any combination of the following options:
 
   | Option                         | Type      | Description                                                          |
   | :----------------------------- | :-------- | :------------------------------------------------------------------- |
@@ -250,7 +250,7 @@ The `getStationaryStatus` function returns a `Promise` that resolves with a stat
 **Notes:**
 
 Works by trying to reach the status endpoint of the eID client as specified in
-[TR-03124-1 eID-Client – Part 1: Specifications](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03124/TR-03124-1.pdf?__blob=publicationFile&v=1)
+[TR-03124-1 eID-Client - Part 1: Specifications](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03124/TR-03124-1.pdf?__blob=publicationFile&v=1)
 
 Some browsers (as of the time writing only Safari) block requests to localhost origins
 due to mixed-content restrictions. This function returns the `"unknown"` status in this case.
@@ -300,7 +300,7 @@ const clientURL = getClientURL([options]);
 
 **Parameters:**
 
-- `options` (optional) – An object which customizes the returned URL.
+- `options` (optional) - An object which customizes the returned URL.
 
   - `mobile` (optional) - common _boolean_ flag to switch between the [`ClientURLStationary` and `ClientURLMobile`](#clienturlstationary--clienturlmobile) base URLs. Uses [`isMobile`](#ismobile) as the default.
 
@@ -335,7 +335,7 @@ const clientURL = getClientURL({
 
 **Notes:**
 
-For a better understanding of what an eID clientURL is see Section 2.2 in [TR-03124-1 eID-Client – Part 1: Specifications](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03124/TR-03124-1.pdf?__blob=publicationFile&v=1).
+For a better understanding of what an eID clientURL is see Section 2.2 in [TR-03124-1 eID-Client - Part 1: Specifications](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03124/TR-03124-1.pdf?__blob=publicationFile&v=1).
 
 ### `ClientURLStationary` / `ClientURLMobile`
 
@@ -350,7 +350,7 @@ export const ClientURLMobile = "eid://127.0.0.1:24727/eID-Client";
 
 **See:**
 
-- [TR-03124-1 eID-Client – Part 1: Specifications](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03124/TR-03124-1.pdf?__blob=publicationFile&v=1), Section 2.2 Full eID-Client
+- [TR-03124-1 eID-Client - Part 1: Specifications](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03124/TR-03124-1.pdf?__blob=publicationFile&v=1), Section 2.2 Full eID-Client
 
 ### `isMobile()`
 
