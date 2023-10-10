@@ -42,13 +42,25 @@
       </section>
     </main>
     <div class="footer">
-      <a target="_blank" class="url" href="https://github.com/Governikus/identglue">Github</a>
-      <a target="_blank" class="url" href="https://www.npmjs.com/package/@ausweisapp2/identglue">npm</a>
+      <a
+        target="_blank"
+        class="url"
+        href="https://github.com/Governikus/identglue"
+        >Github</a
+      >
+      <a
+        target="_blank"
+        class="url"
+        href="https://www.npmjs.com/package/@ausweisapp2/identglue"
+        >npm</a
+      >
     </div>
 
-     <script src="https://code.jquery.com/jquery-3.6.4.slim.js" 
-             integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4="
-             crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.slim.js"
+      integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc="
+      crossorigin="anonymous"
+    ></script>
     <script src="/dist/identglue.umd.js"></script>
     <script>
       $(function () {
@@ -59,9 +71,8 @@
           if (status.details) {
             s += `\nfound ${status.details.name}, version ${status.details.implementationVersion} by ${status.details.implementationVendor}`;
           }
-          if (s.includes("safari"))
-          {
-            s = "Status: Please start the AusweisApp2 first"
+          if (s.includes("safari")) {
+            s = "Status: Please start the AusweisApp2 first";
           }
           $("#status").text(s);
         });
@@ -74,7 +85,9 @@
           $("#eid-install-app-hint").removeAttr("hidden");
         });
         const browserInfo = window.navigator.userAgent;
-        $("#browser-info").text("Browser: " +  browserInfo.concat(" ", window.navigator.vendor));
+        $("#browser-info").text(
+          "Browser: " + browserInfo.concat(" ", window.navigator.vendor)
+        );
       });
     </script>
   </body>
