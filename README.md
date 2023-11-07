@@ -114,8 +114,8 @@ document.body.appendChild(img);
 If you want to learn more about integrating the eID functionality into your system, the following resources might be usefull:
 
 - [TR-03124-1 eID-Client - Part 1: Specifications](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03124/TR-03124-1.pdf?__blob=publicationFile&v=1)
-- [AusweisApp2 SDK Documentation](https://www.ausweisapp.bund.de/sdk/)
-- [AusweisApp2 GitHub repository](https://github.com/Governikus/AusweisApp2)
+- [AusweisApp SDK Documentation](https://www.ausweisapp.bund.de/sdk/)
+- [AusweisApp GitHub repository](https://github.com/Governikus/AusweisApp2)
 
 **Usage with IE11:**
 
