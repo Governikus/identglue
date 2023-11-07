@@ -5,7 +5,7 @@ import { StationaryStatusObserver } from "../src/stationary-status-observer.js";
 describe("StationaryStatusObserver", function () {
   var sso, cb;
 
-  var aa2AppUrl = "http://127.0.0.1:24727/eID-Client?Status=json";
+  var ausweisAppUrl = "http://127.0.0.1:24727/eID-Client?Status=json";
 
   var originalFetch;
 
@@ -38,7 +38,7 @@ describe("StationaryStatusObserver", function () {
   });
 
   it("starts fetching the status", function (done) {
-    jasmine.Ajax.stubRequest(aa2AppUrl).andReturn({
+    jasmine.Ajax.stubRequest(ausweisAppUrl).andReturn({
       status: 200,
       statusText: "HTTP/1.0 200 OK",
     });
