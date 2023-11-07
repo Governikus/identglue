@@ -1,6 +1,6 @@
 {
   "name": "@ausweisapp2/identglue",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "This library allows webpages to integrate seamlessly with the German eID system. It provides client-side helpers to detect or open an eID client and start an identification process from the browser.",
   "files": [
     "dist"
@@ -19,7 +19,8 @@
   "repository": "https://github.com/Governikus/identglue.git",
   "keywords": [
     "eID",
-    "AusweisApp2"
+    "AusweisApp2",
+    "AusweisApp"
   ],
   "author": "Governikus GmbH & Co. KG",
   "license": "EUPL-1.2",
