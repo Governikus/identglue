@@ -28,7 +28,7 @@ The script exports all functions under the `AusweisApp2` namespace on the global
 or use the direct call to the script with a specific version.
 
 ```html
-<script src="https://unpkg.com/@ausweisapp2/identglue@1.0.7/dist/identglue.umd.js"></script>
+<script src="https://unpkg.com/@ausweisapp2/identglue@1.0.8/dist/identglue.umd.js"></script>
 ```
 
 ## Usage
