@@ -31,7 +31,7 @@
     "test": "npm run format:check && eslint src && npm run karma:start",
     "release": "npm run build && npm t && git commit -am \"$npm_package_version\" && git tag $npm_package_version && git push && git push --tags && npm publish",
     "format": "prettier --write './**/*.{ts,js,cjs,json,yml,md}'",
-    "format:check": "prettier --check './**/*.{ts,js,cjs,json,yml,md}'",
+    "format:check": "prettier --check \"./**/*.{ts,js,cjs,json,yml,md}\"",
     "karma:start": "karma start karma.conf.cjs"
   },
   "devDependencies": {
