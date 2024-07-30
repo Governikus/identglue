@@ -8,7 +8,7 @@ This library allows webpages to integrate seamlessly with the German eID system.
 - Helpers for creating spec-compliant eID client URLs
   - Use them with frameworks and libaries like React, Vue, Svelte, etc. or server side rendered pages.
 - Rules out cross platform differences
-- Experimental: Detection on mobile platforms and ChromeOS
+- Experimental: Detection on mobile platforms
 
 ## Installation
 
@@ -28,7 +28,7 @@ The script exports all functions under the `AusweisApp2` namespace on the global
 or use the direct call to the script with a specific version.
 
 ```html
-<script src="https://unpkg.com/@ausweisapp2/identglue@1.0.11/dist/identglue.umd.js"></script>
+<script src="https://unpkg.com/@ausweisapp2/identglue@1.0.12/dist/identglue.umd.js"></script>
 ```
 
 ## Usage
