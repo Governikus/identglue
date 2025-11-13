@@ -123,8 +123,29 @@ This library supports all modern browsers by default. To use this library in old
 
 ## Limitations
 
-- The **Safari** browser treats _localhost_ as mixed-content and therefore blocks fetch calls to it. Here, we have no way of detecting wether an eID client is installed and running.<sup id="a1">[1](#f1)</sup>
-- The detection on mobile systems via the localhost server is not possible. Instead we are trying to guess, after the user clicks on a link to open the eID client, if the app really opened or not. This detection is highly dependent on the mobile browser used and might break in the future. A service provider should always use this information only as a hint and still provide a guided user experience (e.g. by showing a dialog to the user, asking if she has an eID client installed).
+### Safari limitations on macOS
+
+On **macOS**, Identglue currently cannot reliably detect whether the eID client is installed and running.<sup id="a1">[1](#f1)</sup>  
+The reason lies with the **Safari browser**: for security reasons, Safari treats requests to _localhost_ as mixed content and therefore blocks `fetch` calls to it. As a result, Identglue cannot check whether the eID client is active.
+
+This restriction **only** applies to Safari on macOS.
+
+Other browsers handle _localhost_ connections differently, for example:
+
+- **Firefox** allows access without issues.
+- **Google Chrome** generally permits such connections but may display a user prompt or warning, depending on the version and settings.
+
+For more details on mixed content and browser compatibility, see:  
+[**MDN Web Docs: Mixed Content – Browser Compatibility**](https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content#browser_compatibility)
+
+### Detection on mobile systems
+
+Detection on mobile systems via the localhost server is **not possible**.  
+Instead we are trying to guess, after the user clicks on a link to open the eID client, if the app really opened or not.
+
+This detection is **highly dependent** on the mobile browser used and might break in the future.  
+A service provider should always treat this information **only as a hint**, and still provide a guided user experience  
+(for example, by showing a dialog asking the user whether they have an eID client installed).
 
 ## API Reference
 

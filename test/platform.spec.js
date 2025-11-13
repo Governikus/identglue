@@ -37,7 +37,16 @@ describe("platform", function () {
       navigator.__defineGetter__("vendor", function () {
         return "Apple Computer, Inc.";
       });
+      expect(isMobile()).toBe(true);
+    });
 
+    it("should return true on iPadOS 13+ (Macintosh with touch support)", function () {
+      navigator.__defineGetter__("userAgent", function () {
+        return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Mobile/15E148 Safari/604.1";
+      });
+      document.__defineGetter__("ontouchend", function () {
+        return true;
+      });
       expect(isMobile()).toBe(true);
     });
 
@@ -45,7 +54,6 @@ describe("platform", function () {
       navigator.__defineGetter__("userAgentData", function () {
         return { mobile: true };
       });
-
       expect(isMobile()).toBe(true);
     });
 
@@ -53,8 +61,29 @@ describe("platform", function () {
       navigator.__defineGetter__("userAgent", function () {
         return "Mozilla/5.0 (Linux; Android 8.0.0; SM-G960F Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36";
       });
-
       expect(isMobile()).toBe(true);
+    });
+
+    it("should return true on old Symbian phone", function () {
+      navigator.__defineGetter__("userAgent", function () {
+        return "Mozilla/5.0 (SymbianOS/9.4; Series60/5.0 Nokia5800 XpressMusic/51.0.006) AppleWebKit/525 (KHTML, like Gecko) BrowserNG/7.1.12344";
+      });
+      expect(isMobile()).toBe(true);
+    });
+
+    it("should return true on Android tablet (no 'mobile' keyword)", function () {
+      navigator.__defineGetter__("userAgent", function () {
+        return "Mozilla/5.0 (Linux; Android 9; SM-T720) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.93 Safari/537.36";
+      });
+      expect(isMobile()).toBe(true);
+    });
+
+    it("should return false on macOS desktop without touch support", function () {
+      navigator.__defineGetter__("userAgent", function () {
+        return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15";
+      });
+      delete document.ontouchend;
+      expect(isMobile()).toBe(false);
     });
   });
 
@@ -70,9 +99,9 @@ describe("platform", function () {
       navigator.__defineGetter__("vendor", function () {
         return "Apple Computer, Inc.";
       });
-
       expect(isSafari()).toBe(true);
     });
+
     it("should return true on macOS Safari", function () {
       navigator.__defineGetter__("userAgent", function () {
         return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Safari/605.1.15";
@@ -80,8 +109,24 @@ describe("platform", function () {
       navigator.__defineGetter__("vendor", function () {
         return "Apple Computer, Inc.";
       });
-
       expect(isSafari()).toBe(true);
+    });
+
+    it("should return false on Chrome for iOS", function () {
+      navigator.__defineGetter__("userAgent", function () {
+        return "Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/96.0.4664.45 Mobile/15E148 Safari/604.1";
+      });
+      navigator.__defineGetter__("vendor", function () {
+        return "Google Inc.";
+      });
+      expect(isSafari()).toBe(false);
+    });
+
+    it("should return false when vendor is null", function () {
+      navigator.__defineGetter__("vendor", function () {
+        return null;
+      });
+      expect(isSafari()).toBe(false);
     });
   });
 
@@ -108,8 +153,27 @@ describe("platform", function () {
       navigator.__defineGetter__("vendor", function () {
         return "Google Inc.";
       });
-
       expect(isChromeOS()).toBe(true);
+    });
+
+    it("should return false on Windows Chrome", function () {
+      navigator.__defineGetter__("userAgent", function () {
+        return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36";
+      });
+      navigator.__defineGetter__("vendor", function () {
+        return "Google Inc.";
+      });
+      expect(isChromeOS()).toBe(false);
+    });
+
+    it("should return false if vendor is missing", function () {
+      navigator.__defineGetter__("vendor", function () {
+        return null;
+      });
+      navigator.__defineGetter__("userAgent", function () {
+        return "Mozilla/5.0 (X11; CrOS x86_64 15183.78.0)";
+      });
+      expect(isChromeOS()).toBe(false);
     });
   });
 });

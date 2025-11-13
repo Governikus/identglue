@@ -85,7 +85,7 @@ export async function getStationaryStatus() {
     );
     return produceStatus("available", details);
   } catch (err) {
-    // Safari treats localhost as mixed content and therefor blocks those requests with this error.
+    // Safari treats localhost as mixed content and therefore blocks those requests with this error.
     if (
       err instanceof TypeError &&
       err.message === "Not allowed to request resource"
