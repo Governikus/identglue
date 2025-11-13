@@ -23,7 +23,7 @@
     "AusweisApp"
   ],
   "author": "Governikus GmbH & Co. KG",
-  "license": "EUPL-1.2",
+  "license": "Apache-2.0",
   "homepage": "https://github.com/Governikus/identglue",
   "scripts": {
     "dev": "microbundle watch & serve .",
