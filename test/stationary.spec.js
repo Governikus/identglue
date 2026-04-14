@@ -1,6 +1,7 @@
 import { fetch as fetchPolyfill } from "whatwg-fetch";
 
 import { getStationaryStatus } from "../src/stationary.js";
+import { BrowserHelper } from "./browser.helper.js";
 
 describe("getStationaryStatus", function () {
   var ausweisAppUrl = "http://127.0.0.1:24727/eID-Client?Status=json";
@@ -93,13 +94,18 @@ describe("getStationaryStatus", function () {
     jasmine.Ajax.stubRequest(ausweisAppUrl).andTimeout();
 
     return getStationaryStatus().then(function (status) {
-      expect(status.status).toBe("unavailable");
+      if (BrowserHelper.isChrome()) {
+        expect(status.status).toBe("prompt");
+      } else if (BrowserHelper.isFirefox()) {
+        expect(status.status).toBe("unknown");
+      }
     });
   });
 
   it("should resolve the 'unavailable' status, when the AusweisApp responds with error status code", function () {
-    jasmine.Ajax.stubRequest(ausweisAppUrl).andError({
+    jasmine.Ajax.stubRequest(ausweisAppUrl).andReturn({
       status: 404,
+      responseText: "",
     });
 
     return getStationaryStatus().then(function (status) {
@@ -113,7 +119,11 @@ describe("getStationaryStatus", function () {
     });
 
     return getStationaryStatus().then(function (status) {
-      expect(status.status).toBe("unknown");
+      if (BrowserHelper.isChrome()) {
+        expect(status.status).toBe("prompt");
+      } else if (BrowserHelper.isFirefox()) {
+        expect(status.status).toBe("unknown");
+      }
     });
   });
 });

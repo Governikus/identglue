@@ -28,7 +28,7 @@ The script exports all functions under the `AusweisApp2` namespace on the global
 or use the direct call to the script with a specific version.
 
 ```html
-<script src="https://unpkg.com/@ausweisapp2/identglue@2.0.0/dist/identglue.umd.js"></script>
+<script src="https://unpkg.com/@ausweisapp2/identglue@2.1.0/dist/identglue.umd.js"></script>
 ```
 
 ## Usage
@@ -56,6 +56,10 @@ const observer = new StationaryStatusObserver((status) => {
     // TODO: display a message to the users, asking to install and start the eID client.
   } else if (status.status === "safari") {
     // TODO: display a message to the users, asking to install and start the eID client for Safari Browser.
+  } else if (status.status === "prompt") {
+    // TODO: display a message to the users, to consent to the local network access dialog (Works only on Chromium based Browsers).
+  } else if (status.status === "blocked") {
+    // TODO: display a message to the users, to consent to the local network access (Works only on Chromium based Browsers).
   } else {
     // TODO: display a generic warning message and enable the "Start Identification" button
   }
@@ -132,8 +136,7 @@ This restriction **only** applies to Safari on macOS.
 
 Other browsers handle _localhost_ connections differently, for example:
 
-- **Firefox** allows access without issues.
-- **Google Chrome** generally permits such connections but may display a user prompt or warning, depending on the version and settings.
+- **Chromium based Browsers** and **Firefox** may display a user prompt or warning, depending on the version and settings.
 
 For more details on mixed content and browser compatibility, see:  
 [**MDN Web Docs: Mixed Content – Browser Compatibility**](https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content#browser_compatibility)
@@ -273,8 +276,10 @@ The `getStationaryStatus` function returns a `Promise` that resolves with a stat
 Works by trying to reach the status endpoint of the eID client as specified in
 [TR-03124-1 eID-Client - Part 1: Specifications](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03124/TR-03124-1.pdf?__blob=publicationFile&v=1)
 
-Some browsers (as of the time writing only Safari) block requests to localhost origins
-due to mixed-content restrictions. This function returns the `"unknown"` status in this case.
+The Safari Browser blocks requests to localhost origins by default due to mixed-content restrictions.
+The Firefox Browser displays a prompt asking the user whether they want to grant local network access.
+This prevents the system from detecting whether the AusweisApp is not running or whether the prompt was not accepted.
+This function returns the `"unknown"` status in this case.
 
 eID clients don't start a background http server on mobile platforms.
 The returned state is undefined in this case and one should check
@@ -409,10 +414,10 @@ if (isMobile()) {
 
 The type of the object returned by the [`getStationaryStatus`](#getstationarystatus) function and in the [`StationaryStatusObserver`](#stationarystatusobserver) callback.
 
-| Property                        | Type               | Description                                          |
-| :------------------------------ | :----------------- | :--------------------------------------------------- |
-| `status`                        | `string`           | One of `"available"`, `"unavailable"` or `"unknown"` |
-| `details`                       | `null` or `object` | Only not `null` if `status` equals `"available"`     |
+| Property                        | Type               | Description                                                                   |
+| :------------------------------ | :----------------- | :---------------------------------------------------------------------------- |
+| `status`                        | `string`           | One of `"available"`, `"unavailable"`, `"prompt"`, `"blocked"` or `"unknown"` |
+| `details`                       | `null` or `object` | Only not `null` if `status` equals `"available"`                              |
 | `details.implementationTitle`   | `string`           |
 | `details.implementationVendor`  | `string`           |
 | `details.implementationVersion` | `string`           |

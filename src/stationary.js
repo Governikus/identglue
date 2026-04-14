@@ -3,10 +3,11 @@
  */
 
 import { getClientURL } from "./common.js";
+import { isSafari } from "./platform.js";
 
 /**
  * @typedef {Object} AusweisApp2Status
- * @prop {"available" | "unavailable" | "unknown" | "safari"} status
+ * @prop {"available" | "unavailable" | "unknown" | "safari" | "blocked" | "prompt" } status
  * @prop {AusweisApp2StatusResponse | null} details
  */
 
@@ -51,8 +52,8 @@ function parseResponse(json) {
  * Works by trying to reach the status endpoint of the eID client as specified in
  * [TR-03124-1 eID-Client – Part 1: Specifications](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03124/TR-03124-1.pdf?__blob=publicationFile&v=1)
  *
- * Some browsers (as of the time writing only Safari) block requests to localhost origins
- * due to mixed-content restrictions. This function returns the `"unknown"` status in this case.
+ * Some browsers block requests to localhost origins due to mixed-content restrictions.
+ * This function returns the `"unknown"` status in this case.
  *
  * eID clients don't start a background http server on mobile platforms.
  * The returned state is undefined in this case and one should check
@@ -71,6 +72,7 @@ export async function getStationaryStatus() {
   }
 
   const url = getClientURL({ action: "status", json: true, mobile: false });
+  const permissionState = await getLocalNetworkAccessPermissionState();
 
   try {
     const res = await fetch(url);
@@ -85,14 +87,36 @@ export async function getStationaryStatus() {
     );
     return produceStatus("available", details);
   } catch (err) {
-    // Safari treats localhost as mixed content and therefore blocks those requests with this error.
-    if (
-      err instanceof TypeError &&
-      err.message === "Not allowed to request resource"
-    ) {
+    if (permissionState === "prompt") {
+      return produceStatus("prompt", null);
+    }
+    if (permissionState === "denied") {
+      return produceStatus("blocked", null);
+    }
+    if (permissionState === "unsupported") {
       return produceStatus("unknown", null);
     }
 
+    if (isSafari()) {
+      return produceStatus("safari", null);
+    }
+
     return produceStatus("unavailable", null);
+  }
+}
+
+/**
+ * Uses the browsers permission API to check for status of local network access. Works only on Chrome browsers
+ * @returns {Promise<"denied"|"granted"|"prompt"|string>}
+ */
+async function getLocalNetworkAccessPermissionState() {
+  try {
+    const result = await navigator.permissions.query({
+      // @ts-ignore
+      name: "local-network-access",
+    });
+    return result.state;
+  } catch (e) {
+    return "unsupported";
   }
 }
